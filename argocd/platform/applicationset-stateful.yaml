@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: recruitment-stateful
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - git:
+        repoURL: https://github.com//recruitment-organisation/recruitment-gitops.git
+        revision: main
+        files:
+          - path: values/stateful/*.yaml
+  template:
+    metadata:
+      name: '{{ .fullnameOverride }}'
+      labels:
+        app.kubernetes.io/part-of: recruitment
+        app.kubernetes.io/component: stateful
+    spec:
+      project: recruitment
+      source:
+        repoURL: https://github.com/recruitment-organisation/recruitment-gitops.git
+        targetRevision: main
+        path: charts/stateful
+        helm:
+          releaseName: '{{ .fullnameOverride }}'
+          valueFiles:
+            - '../../values/stateful/{{ .path.filename }}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: recruitment
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

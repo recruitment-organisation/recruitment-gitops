@@ -1,0 +1,57 @@
+fullnameOverride: auth-service
+
+replicas: 2
+
+image:
+  repository: iheb/auth-service
+  tag: "1.0.0"
+
+container:
+  port: 8092
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8092
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 5
+
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+  - name: CONFIG_SERVICE_URL
+    value: http://config-service:9999
+  - name: DISCOVERY_SERVICE_URL
+    value: http://discovery-service:8761/eureka
+  - name: KEYCLOAK_SERVER_URL
+    value: http://keycloak-service:8080
+  - name: KEYCLOAK_REALM
+    value: micro-service
+  - name: KEYCLOAK_CLIENT_ID
+    value: spring-service
+  - name : KEYCLOAK_ADMIN_USER
+    value : keycloak
+
+secretEnv: []
+existingSecret: auth-service-credentials
+serviceAccount:
+
+  create: true
+  automount: false
+
+
+autoscaling:
+  enabled: true
+
+  minReplicas: 2
+  maxReplicas: 10
+
+  targetCPUUtilizationPercentage: 65
+
+podDisruptionBudget:
+  enabled: true
+
+  minAvailable: 2

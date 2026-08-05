@@ -1,0 +1,60 @@
+nameOverride: ""
+fullnameOverride: ""
+
+replicas: 1
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+container:
+  port: null
+  portName: tcp
+
+  ports: []
+
+  command: []
+  args: []
+
+service:
+  enabled: true
+  port: null
+  publishNotReadyAddresses: false
+
+  
+  ports: []
+
+configMap:
+  enabled: false
+  data: {}
+
+secret:
+  create: false
+
+  existingSecret: ""
+
+  data: {}
+  env: []
+
+persistence:
+  enabled: false
+  mountPath: ""
+  size: null
+  storageClassName: ""
+
+  accessModes:
+    - ReadWriteOnce
+
+resources: {}
+
+podSecurityContext: {}
+
+readinessProbe: {}
+livenessProbe: {}
+
+serviceAccount:
+  create: true
+  name: ""
+  automount: false
+  annotations: {}

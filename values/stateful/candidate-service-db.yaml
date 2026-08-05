@@ -1,0 +1,46 @@
+fullnameOverride: candidate-service-db
+
+replicas: 1
+
+image:
+  repository: postgres
+  tag: "16-alpine"
+  pullPolicy: IfNotPresent
+
+container:
+  port: 5432
+  portName: postgres
+
+service:
+  enabled: true
+  port: 5432
+
+configMap:
+  enabled: true
+  data:
+    POSTGRES_DB: candidate_db
+    PGDATA: /var/lib/postgresql/data/pgdata
+
+secret:
+  create: false
+  existingSecret: candidate-service-credentials
+  data: {}
+
+persistence:
+  enabled: true
+  mountPath: /var/lib/postgresql/data
+  size: 10Gi
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
+serviceAccount:
+  create: true
+  automount: false

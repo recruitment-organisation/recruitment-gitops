@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "service.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+
+spec:
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicas }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "service.selectorLabels" . | nindent 6 }}
+
+  template:
+    metadata:
+      labels:
+        {{- include "service.selectorLabels" . | nindent 8 }}
+
+    spec:
+      serviceAccountName: {{ include "service.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
+
+      containers:
+
+        - name: {{ include "service.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
+          {{- if .Values.command }}
+          command:
+            {{- toYaml .Values.command | nindent 12 }}
+          {{- end }}
+
+          {{- if or .Values.env .Values.existingSecret .Values.secretEnv }}
+          envFrom:
+            {{- if .Values.env }}
+            - configMapRef:
+                name: {{ include "service.fullname" . }}-config
+            {{- end }}
+            {{- if .Values.existingSecret }}
+            - secretRef:
+                name: {{ .Values.existingSecret }}
+            {{- else if .Values.secretEnv }}
+            - secretRef:
+                name: {{ include "service.fullname" . }}-secret
+            {{- end }}
+          {{- end }}
+
+          {{- with .Values.existingSecretEnv }}
+          env:
+            {{- range . }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.existingSecret }}
+                  key: {{ .key }}
+            {{- end }}
+          {{- end }}
+
+
+          ports:
+            - name: http
+              containerPort: {{ .Values.container.port }}
+              protocol: TCP
+
+          {{- if .Values.probes }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.probes.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.probes.initialDelaySeconds | default 10 }}
+            periodSeconds: {{ .Values.probes.periodSeconds | default 10 }}
+            failureThreshold: {{ .Values.probes.failureThreshold | default 3 }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.probes.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.probes.initialDelaySeconds | default 15 }}
+            periodSeconds: {{ .Values.probes.periodSeconds | default 10 }}
+            failureThreshold: {{ .Values.probes.failureThreshold | default 3 }}
+          {{- end }}
+
+          {{- if .Values.realmConfig }}
+          volumeMounts:
+            - name: realm-import
+              mountPath: /opt/keycloak/data/import/{{ .Values.realmConfig.fileName }}
+              subPath: {{ .Values.realmConfig.fileName }}
+          {{- end }}
+
+      {{- if .Values.realmConfig }}
+      volumes:
+        - name: realm-import
+          configMap:
+            name: {{ include "service.fullname" . }}-realm
+      {{- end }}

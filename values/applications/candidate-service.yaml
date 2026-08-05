@@ -1,0 +1,54 @@
+fullnameOverride: candidate-service
+
+replicas: 2
+
+image:
+  repository: iheb/candidate-service
+  tag: "1.0.0"
+
+container:
+  port: 8091
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8091
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 5
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+  - name: CONFIG_SERVICE_URL
+    value: http://config-service:9999
+  - name: DISCOVERY_SERVICE_URL
+    value: http://discovery-service:8761/eureka
+  - name: KEYCLOAK_SERVER_URL
+    value: http://keycloak-service:8080
+  - name: KEYCLOAK_REALM
+    value: micro-service
+  - name: DB_URL
+    value: jdbc:postgresql://candidate-service-db:5432/candidate_db
+  - name: KAFKA_BOOTSTRAP_SERVERS
+    value: kafka:9092
+
+secretEnv: []
+existingSecret: candidate-service-credentials
+serviceAccount:
+  create: true
+  automount: false
+
+autoscaling:
+  enabled: true
+
+  minReplicas: 2
+  maxReplicas: 10
+
+  targetCPUUtilizationPercentage: 65
+
+podDisruptionBudget:
+  enabled: true
+
+  minAvailable: 2

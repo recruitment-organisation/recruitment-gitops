@@ -1,0 +1,66 @@
+fullnameOverride: keycloak-service
+
+replicas: 1
+
+image:
+  repository: quay.io/keycloak/keycloak
+  tag: "25.0.1"
+
+container:
+  port: 8080
+
+command:
+  - start
+  - --http-enabled=true
+  - --http-port=8080
+  - --import-realm
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8080
+
+probes:
+  path: /health/ready
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  failureThreshold: 6
+
+env:
+  - name: KC_DB
+    value: postgres
+  - name: KC_DB_URL_HOST
+    value: keycloak-service-db
+  - name: KC_DB_URL_DATABASE
+    value: keycloakdb
+  - name: KC_DB_URL_PORT
+    value: "5432"
+  - name: KC_HTTP_ENABLED
+    value: "true"
+  - name: KC_HEALTH_ENABLED
+    value: "true"
+  - name: KC_LEGACY_OBSERVABILITY_INTERFACE
+    value: "true"
+
+secretEnv: []
+existingSecret: keycloak-service-credentials
+
+realmConfig:
+  fileName: realm-microservice.json
+  sourceFile: files/realm-microservice.json
+serviceAccount:
+  create: true
+  automount: false
+
+autoscaling:
+  enabled: false
+
+  minReplicas: 2
+  maxReplicas: 10
+
+  targetCPUUtilizationPercentage: 65
+
+podDisruptionBudget:
+  enabled: false
+
+  minAvailable: 2

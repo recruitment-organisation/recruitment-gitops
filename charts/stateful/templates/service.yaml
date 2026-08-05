@@ -1,0 +1,31 @@
+{{- if .Values.service.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "stateful.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "stateful.labels" . | nindent 4 }}
+
+spec:
+  clusterIP: None
+  publishNotReadyAddresses: {{ .Values.service.publishNotReadyAddresses }}
+
+  selector:
+    {{- include "stateful.selectorLabels" . | nindent 4 }}
+
+  ports:
+    {{- if .Values.service.ports }}
+    {{- range .Values.service.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ .targetPort | default .name }}
+      protocol: {{ .protocol | default "TCP" }}
+    {{- end }}
+    {{- else }}
+    - name: {{ .Values.container.portName | default "tcp" }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.container.portName | default "tcp" }}
+      protocol: TCP
+    {{- end }}
+{{- end }}

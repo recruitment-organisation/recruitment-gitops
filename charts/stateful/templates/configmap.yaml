@@ -1,0 +1,14 @@
+{{- if .Values.configMap.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "stateful.configMapName" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "stateful.labels" . | nindent 4 }}
+
+data:
+  {{- range $key, $value := .Values.configMap.data }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
+{{- end }}

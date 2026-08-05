@@ -1,0 +1,34 @@
+fullnameOverride: discovery-service
+
+replicas: 2
+
+image:
+  repository: iheb/discovery-service
+  tag: "1.0.0"
+
+container:
+  port: 8761
+
+service:
+  port: 8761
+probes:
+  path: /actuator/health
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 5
+serviceAccount:
+  create: true
+  automount: false
+
+autoscaling:
+  enabled: true
+
+  minReplicas: 2
+  maxReplicas: 10
+
+  targetCPUUtilizationPercentage: 65
+
+podDisruptionBudget:
+  enabled: true
+
+  minAvailable: 2

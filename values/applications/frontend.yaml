@@ -1,0 +1,43 @@
+fullnameOverride: frontend
+
+replicas: 2
+
+image:
+  repository: iheb/recruitment-app
+  tag: "1.0.0"
+
+container:
+  port: 80
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+
+probes:
+  path: /
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  failureThreshold: 3
+
+serviceAccount:
+  create: true
+  automount: false
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - paths:
+        - path: /
+          pathType: Prefix

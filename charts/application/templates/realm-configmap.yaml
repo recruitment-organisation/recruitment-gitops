@@ -1,0 +1,12 @@
+{{- if .Values.realmConfig }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "service.fullname" . }}-realm
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "service.labels" . | nindent 4 }}
+data:
+  {{ .Values.realmConfig.fileName }}: |-
+{{ .Files.Get .Values.realmConfig.sourceFile | required "realmConfig.sourceFile est obligatoire" | indent 4 }}
+{{- end }}

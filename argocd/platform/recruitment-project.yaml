@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: recruitment
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  description: Recruitment platform workloads managed from this Helm repository.
+  sourceRepos:
+    - https://github.com/<GITHUB_ORG>/<HELM_REPOSITORY>.git
+  destinations:
+    - namespace: recruitment
+      server: https://kubernetes.default.svc
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
