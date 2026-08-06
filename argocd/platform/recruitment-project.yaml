@@ -8,7 +8,7 @@ metadata:
 spec:
   description: Recruitment platform workloads managed from this Helm repository.
   sourceRepos:
-    - https://github.com/<GITHUB_ORG>/<HELM_REPOSITORY>.git
+    - https://github.com/recruitment-organisation/recruitment-gitops.git
   destinations:
     - namespace: recruitment
       server: https://kubernetes.default.svc
