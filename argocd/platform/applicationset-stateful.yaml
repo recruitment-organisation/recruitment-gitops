@@ -9,7 +9,7 @@ spec:
     - missingkey=error
   generators:
     - git:
-        repoURL: https://github.com//recruitment-organisation/recruitment-gitops.git
+        repoURL: https://github.com/recruitment-organisation/recruitment-gitops.git
         revision: main
         files:
           - path: values/stateful/*.yaml
