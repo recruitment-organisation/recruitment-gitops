@@ -1,14 +1,11 @@
 fullnameOverride: rag-service
-
 replicas: 2
-
 image:
   repository: ihab0/rag-service
   tag: "2.0.44"
 
 container:
   port: 8094
-
 service:
   enabled: true
   type: ClusterIP
@@ -31,8 +28,8 @@ env:
     value: micro-service
   - name: DB_URL
     value: jdbc:postgresql://rag-service-db:5432/rag_db
-  - name : MINIO_URL
-    value : http://minio:9000
+  - name: MINIO_URL
+    value: http://minio:9000
 secretEnv: []
 existingSecret: rag-service-credentials
 existingSecretEnv:
@@ -41,15 +38,11 @@ existingSecretEnv:
 serviceAccount:
   create: true
   automount: false
-
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
   minAvailable: 2
