@@ -1,14 +1,10 @@
 fullnameOverride: interview-service
-
 replicas: 2
-
 image:
   repository: ihab0/interview-service
-  tag: "1.0.0"
-
+  tag: "2.0.2"
 container:
   port: 8098
-
 service:
   enabled: true
   type: ClusterIP
@@ -31,7 +27,6 @@ env:
     value: micro-service
   - name: INTERVIEW_DB_URL
     value: jdbc:postgresql://interview-service-db:5432/interview_db
-
 secretEnv: []
 existingSecret: interview-service-credentials
 serviceAccount:
@@ -39,13 +34,9 @@ serviceAccount:
   automount: false
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
-
   minAvailable: 2

@@ -1,14 +1,10 @@
 fullnameOverride: job-offer-service
-
 replicas: 2
-
 image:
   repository: ihab0/job-offer-service
-  tag: "1.0.0"
-
+  tag: "2.0.2"
 container:
   port: 8096
-
 service:
   enabled: true
   type: ClusterIP
@@ -33,22 +29,16 @@ env:
     value: jdbc:postgresql://job-offer-service-db:5432/job-offer_db
   - name: KAFKA_BOOTSTRAP_SERVERS
     value: kafka:9092
-
 secretEnv: []
 existingSecret: job-offer-service-credentials
 serviceAccount:
   create: true
   automount: false
-
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
-
   minAvailable: 2

@@ -1,25 +1,20 @@
 fullnameOverride: application-service
-
 replicas: 2
-
 image:
-  repository: ihab0/application-service
-  tag: "1.0.0"
 
+  repository: ihab0/application-service
+  tag: "2.0.2"
 container:
   port: 8097
-
 service:
   enabled: true
   type: ClusterIP
   port: 8097
-
 probes:
   path: /actuator/health
   initialDelaySeconds: 15
   periodSeconds: 10
   failureThreshold: 5
-
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: prod
@@ -33,8 +28,8 @@ env:
     value: micro-service
   - name: APP_DB_URL
     value: jdbc:postgresql://application-service-db:5432/application_db
-  - name : MINIO_URL
-    value : http://minio:9000
+  - name: MINIO_URL
+    value: http://minio:9000
   - name: KAFKA_BOOTSTRAP_SERVERS
     value: kafka:9092
 secretEnv: []
@@ -42,16 +37,11 @@ existingSecret: application-service-credentials
 serviceAccount:
   create: true
   automount: false
-
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
-
   minAvailable: 2

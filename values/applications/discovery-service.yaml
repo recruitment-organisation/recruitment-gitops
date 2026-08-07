@@ -1,14 +1,10 @@
 fullnameOverride: discovery-service
-
 replicas: 2
-
 image:
   repository: ihab0/discovery-service
-  tag: "1.0.0"
-
+  tag: "2.0.2"
 container:
   port: 8761
-
 service:
   port: 8761
 probes:
@@ -19,16 +15,11 @@ probes:
 serviceAccount:
   create: true
   automount: false
-
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
-
   minAvailable: 2
