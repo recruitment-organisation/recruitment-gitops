@@ -3,7 +3,7 @@ fullnameOverride: frontend
 replicas: 2
 
 image:
-  repository: iheb/recruitment-app
+  repository: ihab0/recruitment-app
   tag: "1.0.0"
 
 container:

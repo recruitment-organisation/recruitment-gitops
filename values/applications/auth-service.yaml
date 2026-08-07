@@ -3,7 +3,7 @@ fullnameOverride: auth-service
 replicas: 2
 
 image:
-  repository: iheb/auth-service
+  repository: ihab0/auth-service
   tag: "1.0.0"
 
 container:

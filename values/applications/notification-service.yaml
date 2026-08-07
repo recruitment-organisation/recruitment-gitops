@@ -3,7 +3,7 @@ fullnameOverride: notification-service
 replicas: 2
 
 image:
-  repository: iheb/notification-service
+  repository: ihab0/notification-service
   tag: "1.0.0"
 
 container:

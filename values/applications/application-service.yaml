@@ -3,7 +3,7 @@ fullnameOverride: application-service
 replicas: 2
 
 image:
-  repository: iheb/application-service
+  repository: ihab0/application-service
   tag: "1.0.0"
 
 container:

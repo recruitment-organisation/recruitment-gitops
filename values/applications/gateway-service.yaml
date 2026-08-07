@@ -3,7 +3,7 @@ fullnameOverride: gateway-service
 replicas: 2
 
 image:
-  repository: iheb/gateway-service
+  repository: ihab0/gateway-service
   tag: "1.0.0"
 
 container:

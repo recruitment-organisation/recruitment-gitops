@@ -3,7 +3,7 @@ fullnameOverride: rag-service
 replicas: 2
 
 image:
-  repository: iheb/rag-service
+  repository: ihab0/rag-service
   tag: "1.0.0"
 
 container:

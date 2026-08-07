@@ -3,7 +3,7 @@ fullnameOverride: interview-service
 replicas: 2
 
 image:
-  repository: iheb/interview-service
+  repository: ihab0/interview-service
   tag: "1.0.0"
 
 container:

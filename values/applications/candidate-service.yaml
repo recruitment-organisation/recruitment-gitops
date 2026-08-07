@@ -3,7 +3,7 @@ fullnameOverride: candidate-service
 replicas: 2
 
 image:
-  repository: iheb/candidate-service
+  repository: ihab0/candidate-service
   tag: "1.0.0"
 
 container:

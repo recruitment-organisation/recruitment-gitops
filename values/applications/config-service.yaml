@@ -3,7 +3,7 @@ fullnameOverride: config-service
 replicas: 2
 
 image:
-  repository: iheb/config-service
+  repository: ihab0/config-service
   tag: "1.0.0"
 
 container:

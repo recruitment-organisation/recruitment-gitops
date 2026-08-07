@@ -3,7 +3,7 @@ fullnameOverride: employee-service
 replicas: 2
 
 image:
-  repository: iheb/employee-service
+  repository: ihab0/employee-service
   tag: "1.0.0"
 
 container:

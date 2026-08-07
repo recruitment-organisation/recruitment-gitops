@@ -3,7 +3,7 @@ fullnameOverride: workflow-service
 replicas: 2
 
 image:
-  repository: iheb/workflow-service
+  repository: ihab0/workflow-service
   tag: "1.0.0"
 
 container:

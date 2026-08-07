@@ -3,7 +3,7 @@ fullnameOverride: job-offer-service
 replicas: 2
 
 image:
-  repository: iheb/job-offer-service
+  repository: ihab0/job-offer-service
   tag: "1.0.0"
 
 container:

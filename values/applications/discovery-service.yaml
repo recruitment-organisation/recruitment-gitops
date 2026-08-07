@@ -3,7 +3,7 @@ fullnameOverride: discovery-service
 replicas: 2
 
 image:
-  repository: iheb/discovery-service
+  repository: ihab0/discovery-service
   tag: "1.0.0"
 
 container:
