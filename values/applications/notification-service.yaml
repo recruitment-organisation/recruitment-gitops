@@ -1,25 +1,19 @@
 fullnameOverride: notification-service
-
 replicas: 2
-
 image:
   repository: iheb/notification-service
-  tag: "1.0.0"
-
+  tag: "2.0.3"
 container:
   port: 8093
-
 service:
   enabled: true
   type: ClusterIP
   port: 8093
-
 probes:
   path: /actuator/health
   initialDelaySeconds: 15
   periodSeconds: 10
   failureThreshold: 5
-
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: prod
@@ -35,23 +29,16 @@ env:
     value: micro-service
   - name: KAFKA_BOOTSTRAP_SERVERS
     value: kafka:9092
-
 secretEnv: []
 existingSecret: notification-service-credentials
-
 serviceAccount:
   create: true
   automount: false
-
 autoscaling:
   enabled: true
-
   minReplicas: 2
   maxReplicas: 10
-
   targetCPUUtilizationPercentage: 65
-
 podDisruptionBudget:
   enabled: true
-
   minAvailable: 2
