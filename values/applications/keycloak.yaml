@@ -42,6 +42,8 @@ env:
     value: "true"
   - name: KC_LEGACY_OBSERVABILITY_INTERFACE
     value: "true"
+  - name: KC_HOSTNAME
+    value: "keycloak-service"
   - name: KC_HOSTNAME_STRICT
     value: "false"
 secretEnv: []
