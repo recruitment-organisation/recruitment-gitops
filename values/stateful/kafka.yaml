@@ -1,7 +1,5 @@
 fullnameOverride: kafka
 
-# Single KRaft broker for local development. Use a dedicated Kafka operator/chart
-# and at least three controllers for a production cluster.
 replicas: 1
 
 image:
@@ -20,7 +18,6 @@ container:
 
 service:
   enabled: true
-  # Lets kafka-0.kafka resolve while the broker is starting.
   publishNotReadyAddresses: true
   ports:
     - name: kafka
@@ -28,8 +25,7 @@ service:
     - name: controller
       port: 29093
 
-# KRaft in combined broker/controller mode. The advertised endpoint is the
-# Kubernetes Service DNS name that application pods use: kafka:9092.
+
 configMap:
   enabled: true
   data:
@@ -54,7 +50,7 @@ secret:
 persistence:
   enabled: true
   mountPath: /tmp/kraft-combined-logs
-  size: 10Gi
+  size: 1Gi
   storageClassName: ""
   accessModes:
     - ReadWriteOnce

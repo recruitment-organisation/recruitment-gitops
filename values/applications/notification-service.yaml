@@ -1,5 +1,5 @@
 fullnameOverride: notification-service
-replicas: 2
+replicas: 1
 image:
   repository: ihab0/notification-service
   tag: "2.0.3"
@@ -36,9 +36,9 @@ serviceAccount:
   automount: false
 autoscaling:
   enabled: true
-  minReplicas: 2
-  maxReplicas: 10
+  minReplicas: 1
+  maxReplicas: 2
   targetCPUUtilizationPercentage: 65
 podDisruptionBudget:
   enabled: true
-  minAvailable: 2
+  minAvailable: 1
