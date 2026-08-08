@@ -1,7 +1,7 @@
 fullnameOverride: frontend
 replicas: 2
 image:
-  repository: ihab0/recruitment-app
+  repository: ihab0/frontend
   tag: "2.0.2"
 container:
   port: 80
