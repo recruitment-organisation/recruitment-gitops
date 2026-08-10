@@ -1,1 +1,4 @@
 argocd/platform/argocd-secret.yaml
+argocd/platform/cluster-role-binding.yaml
+argocd/platform/cluster-role.yaml
+argocd/platform/service-account.yaml

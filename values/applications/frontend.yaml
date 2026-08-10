@@ -7,7 +7,7 @@ container:
   port: 80
 service:
   enabled: true
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 probes:
   path: /
@@ -26,9 +26,4 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 1
 ingress:
-  enabled: true
-  className: nginx
-  hosts:
-    - paths:
-        - path: /
-          pathType: Prefix
+  enabled: false
