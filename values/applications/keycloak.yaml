@@ -43,9 +43,11 @@ env:
   - name: KC_LEGACY_OBSERVABILITY_INTERFACE
     value: "true"
   - name: KC_HOSTNAME
-    value: "keycloak-service"
+    value: "http://keycloak.localhost"
   - name: KC_HOSTNAME_STRICT
     value: "false"
+  - name: KC_PROXY_HEADERS
+    value: xforwarded
 secretEnv: []
 existingSecret: keycloak-service-credentials
 
@@ -68,3 +70,14 @@ podDisruptionBudget:
   enabled: false
 
   minAvailable: 1
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
+  hosts:
+    - host: keycloak.localhost
+      paths:
+        - path: /
+          pathType: Prefix
