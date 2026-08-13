@@ -1,0 +1,14 @@
+{{- if .Values.initScripts.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "stateful.fullname" . }}-init-scripts
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "stateful.labels" . | nindent 4 }}
+data:
+  {{- range $name, $content := .Values.initScripts.data }}
+  {{ $name }}: |
+{{ $content | nindent 4 }}
+  {{- end }}
+{{- end }}

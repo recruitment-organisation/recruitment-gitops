@@ -87,6 +87,16 @@ spec:
           volumeMounts:
             - name: data
               mountPath: {{ .Values.persistence.mountPath | default .Values.container.mountPath | required "persistence.mountPath est obligatoire" }}
+            {{- if .Values.initScripts.enabled }}
+            - name: init-scripts
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+            {{- end }}
+          {{- else if .Values.initScripts.enabled }}
+          volumeMounts:
+            - name: init-scripts
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
           {{- end }}
 
           {{- if .Values.readinessProbe }}
@@ -110,6 +120,14 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 10
           {{- end }}
+
+      {{- if .Values.initScripts.enabled }}
+      volumes:
+        - name: init-scripts
+          configMap:
+            name: {{ include "stateful.fullname" . }}-init-scripts
+            defaultMode: 0555
+      {{- end }}
 
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:

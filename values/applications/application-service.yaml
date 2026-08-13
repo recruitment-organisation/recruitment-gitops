@@ -27,7 +27,7 @@ env:
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: APP_DB_URL
-    value: jdbc:postgresql://application-service-db:5432/application_db
+    value: jdbc:postgresql://recruitment-db:5432/application_db
   - name: MINIO_URL
     value: http://minio:9000
   - name: KAFKA_BOOTSTRAP_SERVERS

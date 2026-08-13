@@ -26,7 +26,7 @@ env:
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: FLOWABLE_DB_URL
-    value: jdbc:postgresql://flowable-service-db:5432/workflow_db
+    value: jdbc:postgresql://recruitment-db:5432/flowable
 secretEnv: []
 existingSecret: workflow-service-credentials
 serviceAccount:

@@ -26,7 +26,7 @@ env:
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: EMPLOYEE_DB_URL
-    value: jdbc:postgresql://employee-service-db:5432/employee_db
+    value: jdbc:postgresql://recruitment-db:5432/employee_db
 secretEnv: []
 existingSecret: employee-service-credentials
 serviceAccount:

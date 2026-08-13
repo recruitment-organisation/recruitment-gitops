@@ -29,6 +29,10 @@ configMap:
   enabled: false
   data: {}
 
+initScripts:
+  enabled: false
+  data: {}
+
 secret:
   create: false
 

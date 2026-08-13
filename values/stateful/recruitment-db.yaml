@@ -1,0 +1,100 @@
+fullnameOverride: recruitment-db
+
+replicas: 1
+
+image:
+  repository: postgres
+  tag: "16-alpine"
+  pullPolicy: IfNotPresent
+
+container:
+  port: 5432
+  portName: postgres
+
+service:
+  enabled: true
+  port: 5432
+
+configMap:
+  enabled: true
+  data:
+    POSTGRES_USER: postgres
+    PGDATA: /var/lib/postgresql/data/pgdata
+    KEYCLOAK_DB_NAME: keycloak_db
+    CANDIDATE_DB_NAME: candidate_db
+    APPLICATION_DB_NAME: application_db
+    JOB_OFFER_DB_NAME: job_offer_db
+    INTERVIEW_DB_NAME: interview_db
+    EMPLOYEE_DB_NAME: employee_db
+    FLOWABLE_DB_NAME: flowable
+    NOTIFICATION_DB_NAME: notification_db
+
+secret:
+  create: false
+  existingSecret: recruitment-db-credentials
+
+initScripts:
+  enabled: true
+  data:
+    01-init-multi-db.sh: |
+      #!/bin/sh
+      set -eu
+
+      create_user_and_database() {
+        database="$1"
+        username="$2"
+        password="$3"
+
+        psql --username "$POSTGRES_USER" --dbname postgres \
+          --set=ON_ERROR_STOP=1 \
+          --set=db_name="$database" \
+          --set=db_user="$username" \
+          --set=db_password="$password" <<'SQL'
+      SELECT format('CREATE ROLE %I LOGIN PASSWORD %L', :'db_user', :'db_password')
+      WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = :'db_user') \gexec
+      SELECT format('CREATE DATABASE %I OWNER %I', :'db_name', :'db_user')
+      WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = :'db_name') \gexec
+      SELECT format('GRANT ALL PRIVILEGES ON DATABASE %I TO %I', :'db_name', :'db_user') \gexec
+      SQL
+      }
+
+      create_user_and_database "$KEYCLOAK_DB_NAME" "$KEYCLOAK_DB_USER" "$KEYCLOAK_DB_PASSWORD"
+      create_user_and_database "$CANDIDATE_DB_NAME" "$CANDIDATE_DB_USER" "$CANDIDATE_DB_PASSWORD"
+      create_user_and_database "$APPLICATION_DB_NAME" "$APPLICATION_DB_USER" "$APPLICATION_DB_PASSWORD"
+      create_user_and_database "$JOB_OFFER_DB_NAME" "$JOB_OFFER_DB_USER" "$JOB_OFFER_DB_PASSWORD"
+      create_user_and_database "$INTERVIEW_DB_NAME" "$INTERVIEW_DB_USER" "$INTERVIEW_DB_PASSWORD"
+      create_user_and_database "$EMPLOYEE_DB_NAME" "$EMPLOYEE_DB_USER" "$EMPLOYEE_DB_PASSWORD"
+      create_user_and_database "$FLOWABLE_DB_NAME" "$FLOWABLE_DB_USER" "$FLOWABLE_DB_PASSWORD"
+      create_user_and_database "$NOTIFICATION_DB_NAME" "$NOTIFICATION_DB_USER" "$NOTIFICATION_DB_PASSWORD"
+
+persistence:
+  enabled: true
+  mountPath: /var/lib/postgresql/data
+  size: 50Gi
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 2Gi
+
+readinessProbe:
+  exec:
+    command: ["sh", "-c", "pg_isready -U $POSTGRES_USER -d postgres"]
+  initialDelaySeconds: 10
+  periodSeconds: 5
+
+livenessProbe:
+  exec:
+    command: ["sh", "-c", "pg_isready -U $POSTGRES_USER -d postgres"]
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+serviceAccount:
+  create: true
+  automount: false

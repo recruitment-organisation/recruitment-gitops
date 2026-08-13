@@ -26,7 +26,7 @@ env:
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: JOB_OFFER_DB_URL
-    value: jdbc:postgresql://job-offer-service-db:5432/job-offer_db
+    value: jdbc:postgresql://recruitment-db:5432/job_offer_db
   - name: KAFKA_BOOTSTRAP_SERVERS
     value: kafka:9092
 secretEnv: []

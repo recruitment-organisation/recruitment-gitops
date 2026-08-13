@@ -18,7 +18,7 @@ env:
   - name: SPRING_PROFILES_ACTIVE
     value: prod
   - name: DB_URL
-    value: jdbc:postgresql://notification-service-db:5432/notification_db
+    value: jdbc:postgresql://recruitment-db:5432/notification_db
   - name: CONFIG_SERVICE_URL
     value: http://config-service:9999
   - name: DISCOVERY_SERVICE_URL
