@@ -2,7 +2,7 @@ fullnameOverride: frontend
 replicas: 1
 image:
   repository: ihab0/frontend
-  tag: "2.0.2"
+  tag: "2.0.3"
 container:
   port: 80
 service:

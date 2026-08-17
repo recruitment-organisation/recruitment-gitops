@@ -65,6 +65,7 @@
       "email": "ihebch315@gmail.com",
       "enabled": true,
       "emailVerified": true,
+      "realmRoles": ["HR"],
       "credentials": [
         {
           "type": "password",
