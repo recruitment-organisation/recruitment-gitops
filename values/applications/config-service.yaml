@@ -11,12 +11,21 @@ probes:
   path: /actuator/health
   initialDelaySeconds: 15
   periodSeconds: 10
+  timeoutSeconds: 5
   failureThreshold: 5
 env:
   - name: CONFIG_REPOS
     value: https://github.com/IhabChouaibi/recruitment-config.git
   - name: DISCOVERY_SERVICE_URL
     value: http://discovery-service:8761/eureka
+  - name: MANAGEMENT_HEALTH_CONFIG_ENABLED
+    value: "false"
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_BASEDIR
+    value: /tmp/config-repo
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_CLONE_ON_START
+    value: "true"
+  - name: HOME
+    value: /tmp
 serviceAccount:
   create: true
   automount: false
