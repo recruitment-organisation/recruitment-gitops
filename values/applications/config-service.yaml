@@ -13,8 +13,8 @@ probes:
   periodSeconds: 10
   failureThreshold: 5
 env:
-  - name: CONFIG_SERVICE_URL
-    value: http://config-service:9999
+  - name: CONFIG_REPOS
+    value: https://github.com/IhabChouaibi/recruitment-config.git
   - name: DISCOVERY_SERVICE_URL
     value: http://discovery-service:8761/eureka
 serviceAccount:
