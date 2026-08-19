@@ -2,7 +2,7 @@ fullnameOverride: workflow-service
 replicas: 1
 image:
   repository: ihab0/workflow-service
-  tag: "2.0.42"
+  tag: "3.0.0"
 container:
   port: 8099
 service:
