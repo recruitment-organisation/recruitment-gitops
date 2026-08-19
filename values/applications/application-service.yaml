@@ -1,9 +1,8 @@
 fullnameOverride: application-service
 replicas: 1
 image:
-
   repository: ihab0/application-service
-  tag: "2.0.2"
+  tag: "3.0.0"
 container:
   port: 8097
 service:
