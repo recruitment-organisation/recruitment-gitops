@@ -19,7 +19,7 @@ env:
   - name: DISCOVERY_SERVICE_URL
     value: http://discovery-service:8761/eureka
   - name: KEYCLOAK_SERVER_URL
-    value: http://keycloak.localhost
+    value: http://keycloak-service
 serviceAccount:
   create: true
   automount: false
