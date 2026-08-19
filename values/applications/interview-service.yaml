@@ -2,7 +2,7 @@ fullnameOverride: interview-service
 replicas: 1
 image:
   repository: ihab0/interview-service
-  tag: "3.0.0"
+  tag: "3.0.1"
 container:
   port: 8098
 service:
