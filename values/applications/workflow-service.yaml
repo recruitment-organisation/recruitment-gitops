@@ -24,7 +24,7 @@ env:
   - name: KEYCLOAK_SERVER_URL
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
-    value: http://keycloak.localhost/realms/micro-service
+    value: http://keycloak.localhost
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: FLOWABLE_DB_URL
