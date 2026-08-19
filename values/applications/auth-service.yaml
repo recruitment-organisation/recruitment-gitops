@@ -25,7 +25,7 @@ env:
   - name: DISCOVERY_SERVICE_URL
     value: http://discovery-service:8761/eureka
   - name: KEYCLOAK_SERVER_URL
-    value:  http://keycloak-service
+    value:  http://keycloak-service:8080
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: KEYCLOAK_CLIENT_ID
