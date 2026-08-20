@@ -2,7 +2,7 @@ fullnameOverride: notification-service
 replicas: 1
 image:
   repository: ihab0/notification-service
-  tag: "3.0.0"
+  tag: "3.0.2"
 container:
   port: 8093
 service:
@@ -27,7 +27,6 @@ env:
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
     value: http://keycloak.localhost
-
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: KAFKA_BOOTSTRAP_SERVERS
