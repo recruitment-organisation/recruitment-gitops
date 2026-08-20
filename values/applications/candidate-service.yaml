@@ -2,7 +2,7 @@ fullnameOverride: candidate-service
 replicas: 1
 image:
   repository: ihab0/candidate-service
-  tag: "3.0.0"
+  tag: "3.0.1"
 container:
   port: 8091
 service:
@@ -25,7 +25,6 @@ env:
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
     value: http://keycloak.localhost
-
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: DB_URL
