@@ -2,7 +2,7 @@ fullnameOverride: job-offer-service
 replicas: 1
 image:
   repository: ihab0/job-offer-service
-  tag: "3.0.0"
+  tag: "3.0.2"
 container:
   port: 8096
 service:
@@ -26,7 +26,6 @@ env:
   - name: KEYCLOAK_ISSUER_URI
     value: http://keycloak.localhost
   - name: KEYCLOAK_REALM
-
     value: micro-service
   - name: JOB_OFFER_DB_URL
     value: jdbc:postgresql://recruitment-db:5432/job_offer_db
