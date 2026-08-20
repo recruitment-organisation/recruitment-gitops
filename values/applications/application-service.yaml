@@ -2,7 +2,7 @@ fullnameOverride: application-service
 replicas: 1
 image:
   repository: ihab0/application-service
-  tag: "3.0.0"
+  tag: "3.0.2"
 container:
   port: 8097
 service:
@@ -25,7 +25,6 @@ env:
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
     value: http://keycloak.localhost
-
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: APP_DB_URL
