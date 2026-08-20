@@ -2,7 +2,7 @@ fullnameOverride: rag-service
 replicas: 1
 image:
   repository: ihab0/rag-service
-  tag: "3.0.0"
+  tag: "3.0.2"
 container:
   port: 8094
 service:
