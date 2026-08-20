@@ -78,16 +78,19 @@ spec:
               port: http
             initialDelaySeconds: {{ .Values.probes.initialDelaySeconds | default 10 }}
             periodSeconds: {{ .Values.probes.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.probes.timeoutSeconds | default 5 }}
             failureThreshold: {{ .Values.probes.failureThreshold | default 3 }}
+
           livenessProbe:
             httpGet:
               path: {{ .Values.probes.path }}
               port: http
             initialDelaySeconds: {{ .Values.probes.initialDelaySeconds | default 15 }}
             periodSeconds: {{ .Values.probes.periodSeconds | default 10 }}
+            timeoutSeconds: {{ .Values.probes.timeoutSeconds | default 5 }}
             failureThreshold: {{ .Values.probes.failureThreshold | default 3 }}
-          {{- end }}
 
+          {{- end }}
           {{- if .Values.realmConfig }}
           volumeMounts:
             - name: realm-import
