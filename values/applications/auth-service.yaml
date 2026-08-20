@@ -2,7 +2,7 @@ fullnameOverride: auth-service
 replicas: 1
 image:
   repository: ihab0/auth-service
-  tag: "3.0.0"
+  tag: "3.0.2"
 container:
   port: 8092
 service:
@@ -22,12 +22,11 @@ env:
   - name: DISCOVERY_SERVICE_URL
     value: http://discovery-service:8761/eureka
   - name: KEYCLOAK_SERVER_URL
-    value:  http://keycloak-service:8080
+    value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
     value: http://keycloak.localhost
   - name: KEYCLOAK_REALM
     value: micro-service
- 
   - name: KEYCLOAK_CLIENT_ID
     value: spring-service
   - name: KEYCLOAK_ADMIN_USER
