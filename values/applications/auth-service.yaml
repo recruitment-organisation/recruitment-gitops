@@ -30,7 +30,7 @@ env:
   - name: KEYCLOAK_CLIENT_ID
     value: spring-service
   - name: KEYCLOAK_ADMIN_USER
-    value: keycloak
+    value: admin
 secretEnv: []
 existingSecret: auth-service-credentials
 serviceAccount:
