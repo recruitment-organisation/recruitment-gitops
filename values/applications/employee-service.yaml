@@ -2,7 +2,7 @@ fullnameOverride: employee-service
 replicas: 2
 image:
   repository: ihab0/employee-service
-  tag: "3.0.6"
+  tag: "4.0.0"
 container:
   port: 8095
 service:
