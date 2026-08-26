@@ -11,7 +11,7 @@ service:
   port: 8095
 probes:
   path: /actuator/health
-  initialDelaySeconds: 15
+  initialDelaySeconds: 45
   periodSeconds: 10
   failureThreshold: 5
 env:
