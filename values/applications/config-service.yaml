@@ -9,6 +9,12 @@ service:
   port: 9999
 probes:
   enabled: true
+  startup:
+    path: /actuator/health
+    initialDelaySeconds: 15
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 36
   
 env:
   - name: CONFIG_REPOS

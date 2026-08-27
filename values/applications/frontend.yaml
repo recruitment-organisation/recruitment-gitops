@@ -10,10 +10,28 @@ service:
   type: ClusterIP
   port: 80
 probes:
-  path: /
-  initialDelaySeconds: 5
-  periodSeconds: 10
-  failureThreshold: 3
+  enabled: true
+
+  startup:
+    path: /
+    initialDelaySeconds: 2
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 12
+
+  readiness:
+    path: /
+    initialDelaySeconds: 2
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+  liveness:
+    path: /
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
 serviceAccount:
   create: true
   automount: false
