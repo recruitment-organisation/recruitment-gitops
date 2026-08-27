@@ -9,11 +9,11 @@ service:
   enabled: true
   type: ClusterIP
   port: 8097
+
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 15
-  periodSeconds: 10
-  failureThreshold: 5
+  enabled: true
+
+
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
@@ -35,6 +35,9 @@ env:
     value: kafka:9092
 secretEnv: []
 existingSecret: application-service-credentials
+existingSecretEnv:
+  - name: MINIO_ACCESS_KEY
+    key: MINIO_ACCES_KEY
 serviceAccount:
   create: true
   automount: false

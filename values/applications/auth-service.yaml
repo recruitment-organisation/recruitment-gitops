@@ -10,13 +10,11 @@ service:
   type: ClusterIP
   port: 8092
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 15
-  periodSeconds: 10
-  failureThreshold: 5
+  enabled: true
+  
 env:
   - name: SPRING_PROFILES_ACTIVE
-    value: prod
+    value: kube
   - name: CONFIG_SERVICE_URL
     value: http://config-service:9999
   - name: DISCOVERY_SERVICE_URL
@@ -36,7 +34,7 @@ existingSecret: auth-service-credentials
 serviceAccount:
   create: true
 
-  
+
   automount: false
 autoscaling:
   enabled: true

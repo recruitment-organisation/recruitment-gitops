@@ -30,11 +30,28 @@ resources:
     memory: 1Gi
 
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 10
-  periodSeconds: 10
-  failureThreshold: 4
+  enabled: true
 
+  startup:
+    path: /actuator/health/liveness
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 30
+
+  readiness:
+    path: /actuator/health/readiness
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+  liveness:
+    path: /actuator/health/liveness
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+    
 serviceAccount:
   create: true
 

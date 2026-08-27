@@ -8,11 +8,8 @@ container:
 service:
   port: 9999
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 90
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 5
+  enabled: true
+  
 env:
   - name: CONFIG_REPOS
     value: https://github.com/IhabChouaibi/recruitment-config.git
@@ -30,9 +27,7 @@ serviceAccount:
   create: true
   automount: false
 autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 2
+  enabled: false
   targetCPUUtilizationPercentage: 65
 podDisruptionBudget:
   enabled: true

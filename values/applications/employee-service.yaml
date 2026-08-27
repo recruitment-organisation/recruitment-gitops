@@ -10,10 +10,10 @@ service:
   type: ClusterIP
   port: 8095
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 45
-  periodSeconds: 10
-  failureThreshold: 5
+  enabled: true
+
+
+
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube

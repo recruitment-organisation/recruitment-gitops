@@ -8,10 +8,9 @@ container:
 service:
   port: 8877
 probes:
-  path: /actuator/health
-  initialDelaySeconds: 15
-  periodSeconds: 10
-  failureThreshold: 5
+  enabled: true
+  startup:
+  
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
