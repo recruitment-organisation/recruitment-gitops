@@ -2,14 +2,13 @@ fullnameOverride: discovery-service
 replicas: 1
 image:
   repository: ihab0/discovery-service
-  tag: "2.0.2"
+  tag: "4.5.0"
 container:
   port: 8761
 service:
   port: 8761
 probes:
   enabled: true
- 
 serviceAccount:
   create: true
   automount: false
