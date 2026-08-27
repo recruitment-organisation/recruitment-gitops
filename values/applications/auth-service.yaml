@@ -35,6 +35,8 @@ secretEnv: []
 existingSecret: auth-service-credentials
 serviceAccount:
   create: true
+
+  
   automount: false
 autoscaling:
   enabled: true

@@ -13,6 +13,8 @@ probes:
   periodSeconds: 10
   failureThreshold: 5
 env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: kube
   - name: CONFIG_SERVICE_URL
     value: http://config-service:9999
   - name: DISCOVERY_SERVICE_URL

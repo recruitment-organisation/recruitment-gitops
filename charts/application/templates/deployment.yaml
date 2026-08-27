@@ -22,7 +22,7 @@ spec:
     spec:
       serviceAccountName: {{ include "service.serviceAccountName" . }}
       automountServiceAccountToken: {{ .Values.serviceAccount.automount }}
-
+      terminationGracePeriodSeconds: 30
       containers:
 
         - name: {{ include "service.fullname" . }}
@@ -53,18 +53,19 @@ spec:
                 name: {{ include "service.fullname" . }}-secret
             {{- end }}
           {{- end }}
-
-          {{- with .Values.existingSecretEnv }}
           env:
-            {{- range . }}
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+            {{- range .Values.existingSecretEnv }}
             - name: {{ .name }}
               valueFrom:
                 secretKeyRef:
                   name: {{ $.Values.existingSecret }}
                   key: {{ .key }}
             {{- end }}
-          {{- end }}
-
 
           ports:
             - name: http

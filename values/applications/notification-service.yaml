@@ -16,7 +16,7 @@ probes:
   failureThreshold: 5
 env:
   - name: SPRING_PROFILES_ACTIVE
-    value: prod
+    value: kube
   - name: DB_URL
     value: jdbc:postgresql://recruitment-db:5432/notification_db
   - name: CONFIG_SERVICE_URL
