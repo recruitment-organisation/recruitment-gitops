@@ -2,7 +2,7 @@ fullnameOverride: notification-service
 replicas: 1
 image:
   repository: ihab0/notification-service
-  tag: "3.0.2"
+  tag: "4.5.0"
 container:
   port: 8093
 service:
@@ -10,9 +10,7 @@ service:
   type: ClusterIP
   port: 8093
 probes:
-
   enabled: true
-  
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
