@@ -2,7 +2,7 @@ fullnameOverride: frontend
 replicas: 1
 image:
   repository: ihab0/frontend
-  tag: "4.0.0"
+  tag: "4.5.0"
 container:
   port: 80
 service:
@@ -11,21 +11,18 @@ service:
   port: 80
 probes:
   enabled: true
-
   startup:
     path: /
     initialDelaySeconds: 2
     periodSeconds: 5
     timeoutSeconds: 3
     failureThreshold: 12
-
   readiness:
     path: /
     initialDelaySeconds: 2
     periodSeconds: 5
     timeoutSeconds: 3
     failureThreshold: 3
-
   liveness:
     path: /
     initialDelaySeconds: 5
