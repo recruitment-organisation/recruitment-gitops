@@ -2,7 +2,7 @@ fullnameOverride: gateway-service
 replicas: 1
 image:
   repository: ihab0/gateway-service
-  tag: "3.0.2"
+  tag: "4.5.0"
 container:
   port: 8877
 service:
@@ -10,7 +10,6 @@ service:
 probes:
   enabled: true
   startup:
-  
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
