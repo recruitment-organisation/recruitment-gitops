@@ -2,7 +2,7 @@ fullnameOverride: employee-service
 replicas: 2
 image:
   repository: ihab0/employee-service
-  tag: "4.0.0"
+  tag: "4.5.0"
 container:
   port: 8095
 service:
@@ -11,9 +11,6 @@ service:
   port: 8095
 probes:
   enabled: true
-
-
-
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
