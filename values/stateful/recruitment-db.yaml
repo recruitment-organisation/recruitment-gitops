@@ -10,6 +10,9 @@ image:
 container:
   port: 5432
   portName: postgres
+  args:
+    - "-c"
+    - "max_connections=200"
 
 service:
   enabled: true
