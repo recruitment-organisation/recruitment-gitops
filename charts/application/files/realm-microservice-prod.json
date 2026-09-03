@@ -1,0 +1,59 @@
+{
+  "realm": "micro-service",
+  "enabled": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "rememberMe": true,
+  "resetPasswordAllowed": true,
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": false,
+  "verifyEmail": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "fr"],
+  "defaultLocale": "en",
+  "passwordPolicy": "length(8) and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1)",
+  "clients": [
+    {
+      "clientId": "spring-service",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": true,
+      "rootUrl": "https://app.example.com",
+      "baseUrl": "/",
+      "redirectUris": [
+        "https://app.example.com/*",
+        "https://api.example.com/*"
+      ],
+      "webOrigins": [
+        "https://app.example.com",
+        "https://api.example.com"
+      ]
+    }
+  ],
+  "roles": {
+    "realm": [
+      { "name": "HR" },
+      { "name": "EMPLOYEE" },
+      { "name": "CANDIDATE" },
+      { "name": "MANAGER" }
+    ]
+  },
+  "protocolMappers": [
+    {
+      "name": "client-roles",
+      "protocol": "openid-connect",
+      "protocolMapper": "oidc-usermodel-client-role-mapper",
+      "config": {
+        "client.id": "spring-service",
+        "claim.name": "roles",
+        "access.token.claim": "true",
+        "multivalued": "true"
+      }
+    }
+  ]
+}

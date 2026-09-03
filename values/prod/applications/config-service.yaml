@@ -1,0 +1,49 @@
+fullnameOverride: config-service
+replicas: 1
+image:
+  repository: ihab0/config-service
+  tag: "2.0.2"
+container:
+  port: 9999
+service:
+  port: 9999
+probes:
+  enabled: true
+  startup:
+    path: /actuator/health
+    initialDelaySeconds: 15
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 36
+
+env:
+  - name: CONFIG_REPOS
+    value: https://github.com/IhabChouaibi/recruitment-config.git
+  - name: DISCOVERY_SERVICE_URL
+    value: http://discovery-service:8761/eureka
+  - name: MANAGEMENT_HEALTH_CONFIG_ENABLED
+    value: "false"
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_BASEDIR
+    value: /tmp/config-repo
+  - name: SPRING_CLOUD_CONFIG_SERVER_GIT_CLONE_ON_START
+    value: "true"
+  - name: HOME
+    value: /tmp
+serviceAccount:
+  create: true
+  automount: false
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+autoscaling:
+  enabled: false
+  targetCPUUtilizationPercentage: 65
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1

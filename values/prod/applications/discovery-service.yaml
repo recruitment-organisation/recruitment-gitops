@@ -1,0 +1,28 @@
+fullnameOverride: discovery-service
+replicas: 1
+image:
+  repository: ihab0/discovery-service
+  tag: "4.5.0"
+container:
+  port: 8761
+service:
+  port: 8761
+probes:
+  enabled: true
+serviceAccount:
+  create: true
+  automount: false
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+autoscaling:
+  enabled: false
+  targetCPUUtilizationPercentage: 65
+podDisruptionBudget:
+  enabled: false

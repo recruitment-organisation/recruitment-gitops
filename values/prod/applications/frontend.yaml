@@ -1,0 +1,53 @@
+fullnameOverride: frontend
+replicas: 1
+image:
+  repository: ihab0/frontend
+  tag: "4.5.0"
+container:
+  port: 80
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+probes:
+  enabled: true
+  startup:
+    path: /
+    initialDelaySeconds: 2
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 12
+  readiness:
+    path: /
+    initialDelaySeconds: 2
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+  liveness:
+    path: /
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+serviceAccount:
+  create: true
+  automount: false
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 70
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: app.example.com # REPLACE example.com before deployment.
+      paths:
+        - path: /
+          pathType: Prefix

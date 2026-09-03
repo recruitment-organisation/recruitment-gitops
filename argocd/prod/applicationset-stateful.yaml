@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: recruitment-services
+  name: recruitment-stateful
   namespace: argocd
 spec:
   goTemplate: true
@@ -12,24 +12,23 @@ spec:
         repoURL: https://github.com/recruitment-organisation/recruitment-gitops.git
         revision: main
         files:
-          - path: values/local/applications/*.yaml
+          - path: values/prod/stateful/*.yaml
   template:
     metadata:
-     
       name: '{{ .fullnameOverride }}'
       labels:
         app.kubernetes.io/part-of: recruitment
-        app.kubernetes.io/component: service
+        app.kubernetes.io/component: stateful
     spec:
       project: recruitment
       source:
         repoURL: https://github.com/recruitment-organisation/recruitment-gitops.git
         targetRevision: main
-        path: charts/application
+        path: charts/stateful
         helm:
           releaseName: '{{ .fullnameOverride }}'
           valueFiles:
-            - '../../values/local/applications/{{ .path.filename }}'
+            - '../../values/prod/stateful/{{ .path.filename }}'
       destination:
         server: https://kubernetes.default.svc
         namespace: recruitment

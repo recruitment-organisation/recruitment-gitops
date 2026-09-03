@@ -1,0 +1,50 @@
+fullnameOverride: rag-service-db
+
+replicas: 1
+
+image:
+  repository:  pgvector/pgvector
+  tag: "pg16"
+  pullPolicy: IfNotPresent
+
+container:
+  port: 5432
+  portName: pgvector
+
+service:
+  enabled: true
+  port: 5432
+
+configMap:
+  enabled: true
+  data:
+    POSTGRES_DB: rag_db
+    PGDATA: /var/lib/postgresql/data/pgdata
+
+secret:
+  create: false
+  existingSecret: rag-service-credentials
+  data: {}
+
+persistence:
+  enabled: true
+  mountPath: /var/lib/postgresql/data
+  size: 1Gi
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
+serviceAccount:
+  create: true
+  automount: false

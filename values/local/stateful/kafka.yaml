@@ -84,4 +84,3 @@ livenessProbe:
 serviceAccount:
   create: true
   automount: false
-

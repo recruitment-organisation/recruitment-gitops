@@ -1,0 +1,77 @@
+fullnameOverride: minio
+
+replicas: 1
+
+image:
+  repository: minio/minio
+  tag: "latest" # Pin a version for production deployments.
+  pullPolicy: IfNotPresent
+
+container:
+  args:
+    - server
+    - /data
+    - --console-address
+    - ":9001"
+  ports:
+    - name: minio
+      containerPort: 9000
+    - name: minio-console
+      containerPort: 9001
+
+service:
+  enabled: true
+  ports:
+    - name: minio
+      port: 9000
+    - name: minio-console
+      port: 9001
+
+configMap:
+  enabled: false
+
+secret:
+  create: false
+  existingSecret: minio-credentials
+  data: {}
+
+persistence:
+  enabled: true
+  mountPath: /data
+  size: 10Gi
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
+
+readinessProbe:
+  httpGet:
+    path: /minio/health/live
+    port: minio
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 5
+
+livenessProbe:
+  httpGet:
+    path: /minio/health/live
+    port: minio
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 5
+serviceAccount:
+  create: true
+  automount: false

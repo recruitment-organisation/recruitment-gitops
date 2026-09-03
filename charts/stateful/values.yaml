@@ -54,6 +54,8 @@ resources: {}
 
 podSecurityContext: {}
 
+containerSecurityContext: {}
+
 readinessProbe: {}
 livenessProbe: {}
 

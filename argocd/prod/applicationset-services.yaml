@@ -12,10 +12,9 @@ spec:
         repoURL: https://github.com/recruitment-organisation/recruitment-gitops.git
         revision: main
         files:
-          - path: values/local/applications/*.yaml
+          - path: values/prod/applications/*.yaml
   template:
     metadata:
-     
       name: '{{ .fullnameOverride }}'
       labels:
         app.kubernetes.io/part-of: recruitment
@@ -29,7 +28,7 @@ spec:
         helm:
           releaseName: '{{ .fullnameOverride }}'
           valueFiles:
-            - '../../values/local/applications/{{ .path.filename }}'
+            - '../../values/prod/applications/{{ .path.filename }}'
       destination:
         server: https://kubernetes.default.svc
         namespace: recruitment

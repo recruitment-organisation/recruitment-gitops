@@ -29,6 +29,12 @@ resources:
     cpu: "1"
     memory: 1Gi
 
+podSecurityContext: {}
+
+containerSecurityContext: {}
+
+terminationGracePeriodSeconds: 30
+
 probes:
   enabled: true
 
@@ -80,3 +86,4 @@ ingress:
   className: ""
   annotations: {}
   hosts: []
+  tls: []

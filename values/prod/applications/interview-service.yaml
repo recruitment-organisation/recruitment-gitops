@@ -1,0 +1,54 @@
+fullnameOverride: interview-service
+replicas: 1
+image:
+  repository: ihab0/interview-service
+  tag: "4.5.0"
+container:
+  port: 8098
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8098
+probes:
+  enabled: true
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: kube
+  - name: CONFIG_SERVICE_URL
+    value: http://config-service:9999
+  - name: DISCOVERY_SERVICE_URL
+    value: http://discovery-service:8761/eureka
+  - name: KEYCLOAK_SERVER_URL
+    value: http://keycloak-service:8080
+  - name: KEYCLOAK_ISSUER_URI
+    value: https://auth.example.com/realms/micro-service # REPLACE example.com before deployment.
+  - name: KEYCLOAK_REALM
+    value: micro-service
+  - name: INTERVIEW_DB_URL
+    value: jdbc:postgresql://recruitment-db:5432/interview_db
+  - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+    value: "5"
+  - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+    value: "1"
+secretEnv: []
+existingSecret: interview-service-credentials
+serviceAccount:
+  create: true
+  automount: false
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 65
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
