@@ -47,7 +47,7 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: app.example.com # REPLACE example.com before deployment.
+    - host: app.3-224-80-236.sslip.io
       paths:
         - path: /
           pathType: Prefix

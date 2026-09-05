@@ -23,15 +23,15 @@
       "directAccessGrantsEnabled": true,
       "standardFlowEnabled": true,
       "serviceAccountsEnabled": true,
-      "rootUrl": "https://app.example.com",
+      "rootUrl": "http://app.3-224-80-236.sslip.io",
       "baseUrl": "/",
       "redirectUris": [
-        "https://app.example.com/*",
-        "https://api.example.com/*"
+        "http://app.3-224-80-236.sslip.io/*",
+        "http://api.3-224-80-236.sslip.io/*"
       ],
       "webOrigins": [
-        "https://app.example.com",
-        "https://api.example.com"
+        "http://app.3-224-80-236.sslip.io",
+        "http://api.3-224-80-236.sslip.io"
       ]
     }
   ],

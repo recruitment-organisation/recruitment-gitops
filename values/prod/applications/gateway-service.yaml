@@ -20,7 +20,7 @@ env:
   - name: KEYCLOAK_SERVER_URL
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
-    value: https://auth.example.com/realms/micro-service # REPLACE example.com before deployment.
+    value: http://auth.3-224-80-236.sslip.io/realms/micro-service
   - name: KEYCLOAK_REALM
     value: micro-service
 serviceAccount:
@@ -47,7 +47,7 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: api.example.com # REPLACE example.com before deployment.
+    - host: api.3-224-80-236.sslip.io
       paths:
         - path: /
           pathType: Prefix

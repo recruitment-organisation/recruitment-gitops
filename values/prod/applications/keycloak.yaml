@@ -61,7 +61,7 @@ env:
   - name: KC_LEGACY_OBSERVABILITY_INTERFACE
     value: "true"
   - name: KC_HOSTNAME
-    value: "https://auth.example.com" # REPLACE example.com before deployment.
+    value: "http://auth.3-224-80-236.sslip.io"
   - name: KC_HOSTNAME_STRICT
     value: "true"
   - name: KC_PROXY_HEADERS
@@ -121,9 +121,9 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
     nginx.ingress.kubernetes.io/proxy-redirect-from: http://keycloak-service
-    nginx.ingress.kubernetes.io/proxy-redirect-to: https://auth.example.com # REPLACE example.com before deployment.
+    nginx.ingress.kubernetes.io/proxy-redirect-to: http://auth.3-224-80-236.sslip.io
   hosts:
-    - host: auth.example.com # REPLACE example.com before deployment.
+    - host: auth.3-224-80-236.sslip.io
       paths:
         - path: /
           pathType: Prefix
