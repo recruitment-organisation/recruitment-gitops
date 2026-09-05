@@ -118,10 +118,16 @@ ingress:
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-redirect-from: http://keycloak-service
-    nginx.ingress.kubernetes.io/proxy-redirect-to: http://auth.3-224-80-236.sslip.io
+    nginx.ingress.kubernetes.io/proxy-redirect-to: https://auth.3-224-80-236.sslip.io
   hosts:
     - host: auth.3-224-80-236.sslip.io
       paths:
         - path: /
           pathType: Prefix
+  tls:
+    - secretName: keycloak-production-tls
+      hosts:
+        - auth.3-224-80-236.sslip.io
