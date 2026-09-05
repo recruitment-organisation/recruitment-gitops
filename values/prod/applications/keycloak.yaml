@@ -60,10 +60,8 @@ env:
     value: "true"
   - name: KC_LEGACY_OBSERVABILITY_INTERFACE
     value: "true"
-  - name: KC_HOSTNAME
-    value: "http://auth.3-224-80-236.sslip.io"
   - name: KC_HOSTNAME_STRICT
-    value: "true"
+    value: "false"
   - name: KC_PROXY_HEADERS
     value: xforwarded
   - name: KC_DB_POOL_INITIAL_SIZE
