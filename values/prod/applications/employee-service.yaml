@@ -1,5 +1,5 @@
 fullnameOverride: employee-service
-replicas: 2
+replicas: 1
 image:
   repository: ihab0/employee-service
   tag: "4.5.0"
@@ -45,10 +45,10 @@ containerSecurityContext:
     drop:
       - ALL
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 2
   maxReplicas: 2
   targetCPUUtilizationPercentage: 65
 podDisruptionBudget:
-  enabled: true
+  enabled: false
   minAvailable: 1

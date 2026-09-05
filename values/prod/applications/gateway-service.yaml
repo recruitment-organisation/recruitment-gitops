@@ -36,12 +36,12 @@ containerSecurityContext:
     drop:
       - ALL
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 2
   maxReplicas: 4
   targetCPUUtilizationPercentage: 65
 podDisruptionBudget:
-  enabled: true
+  enabled: false
   minAvailable: 1
 ingress:
   enabled: true
