@@ -20,7 +20,7 @@ env:
   - name: KEYCLOAK_SERVER_URL
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
-    value: https://auth.3-224-80-236.sslip.io/realms/micro-service
+    value: https://auth.3-224-80-236.sslip.io
   - name: KEYCLOAK_REALM
     value: micro-service
 serviceAccount:
