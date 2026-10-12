@@ -1,0 +1,52 @@
+fullnameOverride: gateway-service
+replicas: 1
+image:
+  repository: ihab0/gateway-service
+  tag: "7.0.1"
+container:
+  port: 8877
+service:
+  port: 8877
+probes:
+  enabled: true
+env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: kube
+  - name: CONFIG_SERVICE_URL
+    value: http://config-service:9999
+  - name: DISCOVERY_SERVICE_URL
+    value: http://discovery-service:8761/eureka
+  - name: KEYCLOAK_SERVER_URL
+    value: http://keycloak-service:8080
+  - name: KEYCLOAK_ISSUER_URI
+    value: http://auth.example.com
+  - name: KEYCLOAK_REALM
+    value: micro-service
+serviceAccount:
+  create: true
+  automount: false
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 65
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: api.example.com
+      paths:
+        - path: /
+          pathType: Prefix
