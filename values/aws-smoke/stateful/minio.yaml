@@ -3,8 +3,8 @@ fullnameOverride: minio
 replicas: 1
 
 image:
-  repository: quay.io/minio/aistor/minio
-  tag: "RELEASE.2026-03-26T21-24-40Z"
+  repository: ghcr.io/coollabsio/minio
+  tag: "RELEASE.2025-04-22T22-12-26Z"
   pullPolicy: IfNotPresent
 
 container:
