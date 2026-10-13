@@ -21,7 +21,7 @@ env:
   - name: KEYCLOAK_SERVER_URL
     value: http://keycloak-service:8080
   - name: KEYCLOAK_ISSUER_URI
-    value: http://auth.example.com
+    value: http://auth.98-94-201-79.sslip.io
   - name: KEYCLOAK_REALM
     value: micro-service
   - name: INTERVIEW_DB_URL

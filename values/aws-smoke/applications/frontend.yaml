@@ -47,7 +47,7 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: app.example.com
+    - host: app.98-94-201-79.sslip.io
       paths:
         - path: /
           pathType: Prefix
