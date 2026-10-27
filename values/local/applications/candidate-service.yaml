@@ -2,7 +2,7 @@ fullnameOverride: candidate-service
 replicas: 1
 image:
   repository: ihab0/candidate-service
-  tag: "4.5.0"
+  tag: "8.0.1"
 container:
   port: 8091
 service:
