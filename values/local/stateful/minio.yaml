@@ -3,7 +3,7 @@ fullnameOverride: minio
 replicas: 1
 
 image:
-  repository: minio/minio
+  repository: quay.io/minio/minio
   tag: "latest" # Pin a version for production deployments.
   pullPolicy: IfNotPresent
 
