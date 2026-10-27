@@ -2,7 +2,7 @@ fullnameOverride: config-service
 replicas: 1
 image:
   repository: ihab0/config-service
-  tag: "2.0.2"
+  tag: "8.0.1"
 container:
   port: 9999
 service:
@@ -15,7 +15,6 @@ probes:
     periodSeconds: 5
     timeoutSeconds: 3
     failureThreshold: 36
-  
 env:
   - name: CONFIG_REPOS
     value: https://github.com/IhabChouaibi/recruitment-config.git
