@@ -2,7 +2,7 @@ fullnameOverride: job-offer-service
 replicas: 1
 image:
   repository: ihab0/job-offer-service
-  tag: "7.0.0"
+  tag: "8.0.0"
 container:
   port: 8096
 service:
