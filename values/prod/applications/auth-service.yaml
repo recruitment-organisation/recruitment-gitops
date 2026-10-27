@@ -2,7 +2,7 @@ fullnameOverride: auth-service
 replicas: 1
 image:
   repository: ihab0/auth-service
-  tag: "7.0.0"
+  tag: "8.0.0"
 container:
   port: 8092
 service:
