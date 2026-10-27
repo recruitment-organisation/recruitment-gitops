@@ -2,7 +2,7 @@ fullnameOverride: notification-service
 replicas: 1
 image:
   repository: ihab0/notification-service
-  tag: "7.0.0"
+  tag: "8.0.0"
 container:
   port: 8093
 service:
