@@ -11,6 +11,8 @@ service:
   port: 8093
 probes:
   enabled: true
+  startup:
+    failureThreshold: 120
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: kube
